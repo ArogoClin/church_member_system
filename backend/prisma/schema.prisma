@@ -1,0 +1,79 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DIRECT_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum MaritalStatus {
+  SINGLE
+  MARRIED
+  WIDOWED
+  DIVORCED
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model Admin {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("admins")
+}
+
+model Member {
+  id               String        @id @default(uuid())
+  firstName        String        @map("first_name")
+  lastName         String        @map("last_name")
+  gender           Gender
+  dateOfBirth      DateTime?     @map("date_of_birth") @db.Date
+  phone            String? 
+  maritalStatus    MaritalStatus @default(SINGLE) @map("marital_status")
+  numberOfChildren Int           @default(0) @map("number_of_children")
+  jumuiaId         String?       @map("jumuia_id")
+  jumuia           Jumuia?       @relation(fields: [jumuiaId], references: [id], onDelete: SetNull)
+  groupId          String?       @map("group_id")
+  group            Group?        @relation(fields: [groupId], references: [id], onDelete:  SetNull)
+  status           MemberStatus  @default(ACTIVE)
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+
+  @@map("members")
+}
+
+model Jumuia {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  members   Member[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("jumuias")
+}
+
+model Group {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  members   Member[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("groups")
+}
