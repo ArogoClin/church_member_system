@@ -61,7 +61,7 @@ const Navbar = ({ onMenuClick }) => {
             </div>
             <button
               onClick={handleLogout}
-              className="btn-secondary btn-sm flex items-center space-x-2"
+              className="btn-secondary btn-sm flex items-center space-x-2 rounded-lg"
             >
               <LogOut className="w-4 h-4" />
               <span className="hidden sm:inline">Logout</span>

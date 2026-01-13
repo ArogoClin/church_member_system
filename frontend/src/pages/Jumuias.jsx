@@ -165,7 +165,7 @@ const Jumuias = () => {
               <div className="flex items-center space-x-2 pt-4 border-t border-gray-200">
                 <button
                   onClick={() => handleViewMembers(jumuia)}
-                  className="flex-1 btn-secondary btn-sm flex items-center justify-center space-x-1"
+                  className="flex-1 btn-secondary btn-sm flex items-center justify-center space-x-1 rounded-lg"
                 >
                   <Users className="w-4 h-4" />
                   <span>View Members</span>
