@@ -61,10 +61,10 @@ const Navbar = ({ onMenuClick }) => {
             </div>
             <button
               onClick={handleLogout}
-              className="btn-secondary btn-sm flex items-center space-x-2 rounded-lg"
+              className="group flex items-center space-x-2 px-3 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg border border-transparent hover:border-red-200 transition-all duration-200"
             >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">Logout</span>
+              <LogOut className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+              <span className="hidden sm:inline text-sm font-medium">Logout</span>
             </button>
           </div>
         </div>
